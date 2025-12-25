@@ -1,4 +1,4 @@
-import User from "../models/User.js";
+import User from "../models/userModel.js";
 
 export const createUser = async (req, res) => {
   try {
@@ -56,3 +56,5 @@ export const getUserById = async (req, res) => {
     });
   }
 };
+
+
