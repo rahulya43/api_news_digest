@@ -1,7 +1,7 @@
-import Article from "../models/articleModel";
+import Article from "../models/articleModel.js";
 import axios from "axios";
 
-const NEWS_API_KEY = "YOUR_NEWS_API_KEY";
+const NEWS_API_KEY = "866957b4c5af4bf2aebb7d462168f5ca";
 
 const fetchArticle = async()=>{
     try {
@@ -40,4 +40,4 @@ const fetchArticle = async()=>{
         throw error;
     }
 }
-export default fetch;
+export default fetchArticle;
