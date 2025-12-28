@@ -2,7 +2,7 @@ import Article from "../models/articleModel.js";
 import User from "../models/userModel.js";
 import axios from "axios";
 
-const NEWS_API_KEY = "866957b4c5af4bf2aebb7d462168f5ca";
+const NEWS_API_KEY = "";
 
 const fetchArticle = async(userId = null)=>{
     try {
