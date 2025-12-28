@@ -3,11 +3,13 @@ import fetchArticle from "../services/Fetcher.js"
 
 const callFetcher = async(req,res)=>{
     try {
-        await fetchArticle();
+        const { userId } = req.body;
+        const stats = await fetchArticle(userId);
 
         res.status(200).json({
             success:true,
-            message:"Fetched Successfully"
+            message:"Fetched Successfully",
+            ...stats
         });
     } catch (error) {
         console.error(error);

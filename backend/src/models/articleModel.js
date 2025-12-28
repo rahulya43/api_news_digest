@@ -22,6 +22,18 @@ const articleSchema = new mongoose.Schema(
     },
     tags: {
       type: [String]
+    },
+    aiSummary:{
+        type:String
+    },
+    aiBullets:{
+        type:[String]
+    },
+    summarizedAt:{
+        type:Date
+    },
+    summaryModel:{
+        type:String
     }
   },
   {
