@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // create Gemini client
-const genAI = new GoogleGenerativeAI("AIzaSyAzmzZ0mGarXujqA8REDjGOWGgKlkC9kKU");
+const genAI = new GoogleGenerativeAI("");
 
 // choose model
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
