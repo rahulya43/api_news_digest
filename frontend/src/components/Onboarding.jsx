@@ -19,6 +19,14 @@ const Onboarding = () => {
     'Sports', 'Entertainment', 'Environment', 'Finance', 'Education'
   ];
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
   const handleInterestToggle = (interest) => {
     setFormData(prev => ({
       ...prev,
@@ -31,7 +39,7 @@ const Onboarding = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
+    
     try {
       const keywordsArray = formData.keywords.split(',').map(k => k.trim()).filter(k => k);
       
@@ -39,37 +47,35 @@ const Onboarding = () => {
         ...formData,
         keywords: keywordsArray
       });
-
+      
       if (response.data.success) {
         localStorage.setItem('userId', response.data.user._id);
         navigate('/dashboard');
       }
     } catch (error) {
-      console.error('Error saving user:', error);
-      alert('Error saving profile. Please try again.');
+      console.error('Error creating user:', error);
+      alert('Error creating account');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md mx-auto bg-white rounded-lg shadow-md p-8">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">AI News Digest</h1>
-          <p className="text-gray-600">Get personalized news summaries daily</p>
-        </div>
-
-        <form onSubmit={handleSubmit} className="space-y-6">
+    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">Create Your News Digest</h2>
+        
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Name
             </label>
             <input
               type="text"
-              required
+              name="name"
               value={formData.name}
-              onChange={(e) => setFormData({...formData, name: e.target.value})}
+              onChange={handleInputChange}
+              required
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
@@ -80,9 +86,10 @@ const Onboarding = () => {
             </label>
             <input
               type="email"
-              required
+              name="email"
               value={formData.email}
-              onChange={(e) => setFormData({...formData, email: e.target.value})}
+              onChange={handleInputChange}
+              required
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
@@ -110,13 +117,13 @@ const Onboarding = () => {
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Keywords (comma-separated)
             </label>
-            <textarea
-              required
+            <input
+              type="text"
+              name="keywords"
               value={formData.keywords}
-              onChange={(e) => setFormData({...formData, keywords: e.target.value})}
-              placeholder="AI, machine learning, startups, blockchain..."
+              onChange={handleInputChange}
+              placeholder="AI, machine learning, startups"
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              rows="3"
             />
           </div>
 
@@ -125,12 +132,13 @@ const Onboarding = () => {
               Delivery Method
             </label>
             <select
+              name="delivery"
               value={formData.delivery}
-              onChange={(e) => setFormData({...formData, delivery: e.target.value})}
+              onChange={handleInputChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="email">Email</option>
-              <option value="inapp">In-App</option>
+              <option value="web">Web Only</option>
             </select>
           </div>
 
@@ -140,18 +148,19 @@ const Onboarding = () => {
             </label>
             <input
               type="time"
+              name="digestTime"
               value={formData.digestTime}
-              onChange={(e) => setFormData({...formData, digestTime: e.target.value})}
+              onChange={handleInputChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
           <button
             type="submit"
-            disabled={loading || formData.interests.length === 0}
+            disabled={loading}
             className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? 'Creating Profile...' : 'Create My Digest'}
+            {loading ? 'Creating Account...' : 'Create Account'}
           </button>
         </form>
       </div>
