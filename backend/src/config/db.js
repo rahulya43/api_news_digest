@@ -2,9 +2,7 @@ import mongoose from "mongoose";
 
 // TEMPORARY: hardcoded MongoDB URI to unblock development
 // NOTE: This will be moved to environment variables later
-const MONGO_URI =
-  "mongodb+srv://rahul:984825@cluster0.5pepti0.mongodb.net/ai_news_digest";
-
+const MONGO_URI ="";
 const connectDB = async () => {
   try {
     if (!MONGO_URI) {
